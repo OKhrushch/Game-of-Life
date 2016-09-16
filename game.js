@@ -1,17 +1,4 @@
-﻿var field_size = 10;
-var currentGeneration = generateEmpty2dSquareArray(field_size);
-var nextGeneration = generateEmpty2dSquareArray(field_size);
-
-
-currentGeneration[0][1] = 1;
-currentGeneration[1][2] = 1;
-currentGeneration[2][0] = 1;
-currentGeneration[2][1] = 1;
-currentGeneration[2][2] = 1;
-
-
-
-function generateEmpty2dSquareArray(size) {
+﻿function generateEmpty2dSquareArray(size) {
     var arr = new Array(size);
     for (var i = 0; i < size; i++) {
         arr[i] = new Array(size);
@@ -106,3 +93,14 @@ window.onload = function () {
     button.onclick = onButtonClick;
     display(currentGeneration);
 }
+
+var field_size = 10;
+var currentGeneration = generateEmpty2dSquareArray(field_size);
+var nextGeneration = generateEmpty2dSquareArray(field_size);
+
+
+currentGeneration[0][1] = 1;
+currentGeneration[1][2] = 1;
+currentGeneration[2][0] = 1;
+currentGeneration[2][1] = 1;
+currentGeneration[2][2] = 1;
