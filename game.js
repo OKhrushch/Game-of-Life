@@ -1,9 +1,7 @@
-﻿var a = 30;
-var test = 10;
+﻿var a = 10;
 var seed = new Array(a);
 var neighbours = 0;
 var generation = new Array(a);
-var emptyCells = 0;
 
 
 for (var i = 0; i < seed.length; i++) {
@@ -40,26 +38,20 @@ calcNextGen = function (seed) {
                     }
                 }
             }
-            var actNeighb = neighbours;
             if (seed[i][j] == 1) {
-                if (actNeighb < 2) {
-                    generation[i][j] = 0;
-                }
-                else if (actNeighb > 3) {
-                    generation[i][j] = 0;
-                }
-                else if (actNeighb == 2 || actNeighb == 3) {
+                if (neighbours == 2 || neighbours == 3)
                     generation[i][j] = 1;
+                else {
+                    generation[i][j] = 0;
                 }
             }
-            else if (seed[i][j] == 0) {
-                if (actNeighb == 3) {
-                    generation[i][j] = 1;
-                }
+            else if (seed[i][j] == 0 && neighbours == 3) {
+                generation[i][j] = 1;
             }
         }
     }
 }
+
 
 function getElement(x, y, arr) {
     var x_len = arr.length;
