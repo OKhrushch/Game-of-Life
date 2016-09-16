@@ -1,32 +1,29 @@
-﻿var a = 10;
-var seed = new Array(a);
-var neighbours = 0;
-var generation = new Array(a);
+﻿var field_size = 10;
+var currentGeneration = generateEmpty2dSquareArray(field_size);
+var nextGeneration = generateEmpty2dSquareArray(field_size);
 
 
-for (var i = 0; i < seed.length; i++) {
-    seed[i] = new Array(a);
-    generation[i] = new Array(a);
-}
-for (var i = 0; i < seed.length; i++) {
-    for (var j = 0; j < seed[i].length ; j++) {
-        seed[i][j] = 0;
-        generation[i][j] = 0;
+currentGeneration[0][1] = 1;
+currentGeneration[1][2] = 1;
+currentGeneration[2][0] = 1;
+currentGeneration[2][1] = 1;
+currentGeneration[2][2] = 1;
+
+
+
+function generateEmpty2dSquareArray(size) {
+    var arr = new Array(size);
+    for (var i = 0; i < size; i++) {
+        arr[i] = new Array(size);
+        for (var j = 0; j < size; j++) {
+            arr[i][j] = 0;
+        }
     }
+    return arr;
 }
 
-seed[0][1] = 1;
-seed[1][2] = 1;
-seed[2][0] = 1;
-seed[2][1] = 1;
-seed[2][2] = 1;
 
-
-
-
-
-// Calculate next generation
-calcNextGen = function (seed) {
+function calcNextGeneneration(seed) {
     for (var i = 0; i < seed.length; i++) {
         for (var j = 0; j < seed[i].length; j++) {
             var neighbours = 0;
@@ -40,13 +37,13 @@ calcNextGen = function (seed) {
             }
             if (seed[i][j] == 1) {
                 if (neighbours == 2 || neighbours == 3)
-                    generation[i][j] = 1;
+                    nextGeneration[i][j] = 1;
                 else {
-                    generation[i][j] = 0;
+                    nextGeneration[i][j] = 0;
                 }
             }
             else if (seed[i][j] == 0 && neighbours == 3) {
-                generation[i][j] = 1;
+                nextGeneration[i][j] = 1;
             }
         }
     }
@@ -54,10 +51,10 @@ calcNextGen = function (seed) {
 
 
 function getElement(x, y, arr) {
-    var x_len = arr.length;
-    var tmp = arr[(x_len + x) % x_len];
-    var y_len = tmp.length;
-    return tmp[(y_len + y) % y_len];
+    var xLen = arr.length;
+    var tmp = arr[(xLen + x) % xLen];
+    var yLen = tmp.length;
+    return tmp[(yLen + y) % yLen];
 }
 
 
@@ -81,11 +78,11 @@ function clearContent(element) {
     }
 }
 
-function onClick() {
-    calcNextGen(seed);
-    display(generation);
-    copy(generation, seed);
-    clear(generation);
+function onButtonClick() {
+    calcNextGeneneration(currentGeneration);
+    display(nextGeneration);
+    copy(nextGeneration, currentGeneration);
+    clear(nextGeneration);
 }
 
 function copy(source, destination) {
@@ -104,4 +101,8 @@ function clear(array) {
     }
 }
 
-window.onload = function () { display(seed); }
+window.onload = function () {
+    var button = document.getElementById("nextGenerationButton");
+    button.onclick = onButtonClick;
+    display(currentGeneration);
+}
