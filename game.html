@@ -1,12 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title></title>
     <meta charset="utf-8" />
 
     <style>
-        html *
-        {
+        html * {
             color: #000 !important;
             font-family: Courier !important;
         }
@@ -22,7 +21,7 @@
         var neighbours = 0;
         var generation = new Array(a);
         var emptyCells = 0;
-      
+
 
         for (var i = 0; i < seed.length; i++) {
             seed[i] = new Array(a);
@@ -34,12 +33,6 @@
                 generation[i][j] = 0;
             }
         }
-   //test array filling    
-        //for (var i = test; i < seed.length - test; i++) {
-        //    for (var j = test; j < seed[i].length - test; j++) {
-        //        seed[i][j] = 1;
-        //    }
-        //}
 
         seed[0][1] = 1;
         seed[1][2] = 1;
@@ -49,8 +42,8 @@
 
 
 
-        
-               
+
+
         // Calculate next generation
         calcNextGen = function (seed) {
             for (var i = 0; i < seed.length; i++) {
@@ -58,11 +51,8 @@
                     var neighbours = 0;
                     for (k = i - 1; k <= i + 1; k++) {
                         for (p = j - 1; p <= j + 1; p++) {
-                            if (k < 0 || k >= seed.length || p < 0 || p >= seed.length) {                                
-                                continue;
-                            }
                             if (k == i && p == j) continue;
-                            if (seed[k][p] == 1) {
+                            if (getElement(k, p, seed) == 1) {
                                 neighbours++;
                             }
                         }
@@ -88,6 +78,14 @@
             }
         }
 
+        function getElement(x, y, arr) {
+            var x_len = arr.length;
+            var tmp = arr[(x_len + x) % x_len];
+            var y_len = tmp.length;
+            return tmp[(y_len + y) % y_len];
+        }
+
+
         function display(src) {
             var field = document.getElementById("field");
             clearContent(field);
@@ -102,23 +100,20 @@
         }
 
 
-        function clearContent(element)
-        {
+        function clearContent(element) {
             while (element.hasChildNodes()) {
                 element.removeChild(element.firstChild);
             }
         }
 
-        function onClick()
-        {
+        function onClick() {
             calcNextGen(seed);
             display(generation);
             copy(generation, seed);
             clear(generation);
         }
 
-        function copy(source, destination)
-        {
+        function copy(source, destination) {
             for (var i = 0; i < source.length; i++) {
                 for (var j = 0; j < source[i].length; j++) {
                     destination[i][j] = source[i][j];
@@ -135,8 +130,8 @@
         }
 
         window.onload = function () { display(seed); }
-        
-           
+
+
     </script>
 
     <div id="div1" style="border:3px dashed blue; padding:10px; margin:10px; width:300px; height:100px;">
