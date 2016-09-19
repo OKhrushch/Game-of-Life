@@ -56,12 +56,7 @@ function clearContent(element) {
     }
 }
 
-function onButtonClick() {
-    calcNextGeneneration(currentGeneration);
-    display(nextGeneration);
-    copy(nextGeneration, currentGeneration);
-    clear(nextGeneration);
-}
+
 
 function copy(source, destination) {
     for (var i = 0; i < source.length; i++) {
@@ -82,6 +77,8 @@ function clear(array) {
 window.onload = function () {
     var button = document.getElementById("nextGenerationButton");
     button.onclick = onButtonClick;
+    var canvas = document.getElementById("canvasGameOfLife");
+    canvas.onclick = onCanvasClick;
     display(currentGeneration);
 }
 
@@ -95,3 +92,23 @@ currentGeneration[1][2] = 1;
 currentGeneration[2][0] = 1;
 currentGeneration[2][1] = 1;
 currentGeneration[2][2] = 1;
+
+function onButtonClick() {
+    calcNextGeneneration(currentGeneration);
+    display(nextGeneration);
+    copy(nextGeneration, currentGeneration);
+    clear(nextGeneration);
+}
+
+function onCanvasClick(args) {
+    var canvas = args.target;
+    var cellHeight = canvas.clientHeight / currentGeneration.length;
+    var cellWidth = canvas.clientWidth / currentGeneration[0].length;
+    var cellX = Math.floor(args.offsetX / cellWidth);
+    var cellY = Math.floor(args.offsetY / cellHeight);
+
+
+    currentGeneration[cellX][cellY] == 0 ? currentGeneration[cellX][cellY] = 1 : currentGeneration[cellX][cellY] = 0; 
+
+    display(currentGeneration);
+}
