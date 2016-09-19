@@ -46,16 +46,7 @@ function getElement(x, y, arr) {
 
 
 function display(src) {
-    var field = document.getElementById("field");
-    clearContent(field);
-    for (var i = 0; i < src.length; i++) {
-        var line = "";
-        for (var j = 0; j < src[i].length; j++) {
-            line += src[i][j] == 1 ? "#" : ".";
-        }
-        field.appendChild(document.createTextNode(line));
-        field.appendChild(document.createElement("br"));
-    }
+    drawGame(src);
 }
 
 
