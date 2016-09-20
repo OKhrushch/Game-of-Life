@@ -14,8 +14,13 @@
         <canvas id="canvasGameOfLife" width="300" height="300"></canvas>
     </div>
 
-    <div id="div1"width:250px; height:50px;">
-        <input type="button" id="nextGenerationButton" style="width:300px;" value="Next Generation">
+    <div id="div1">
+        <input type="button" id="nextGenerationButton" value="Next Generation">
+        <input type="button" id="startButton" value="Start" onclick="onStartButtonClick" />
+        <input type="button" id="stopButton" value="Stop" onclick="onStopButtonClick" />        
+    </div>
+    <div id="div2">
+        <p id="counterDisplay">Counter output will be displayed here </p>
     </div>
 </body>
 </html>

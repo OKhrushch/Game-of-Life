@@ -1,4 +1,19 @@
-﻿function generateEmpty2dSquareArray(size) {
+﻿window.onload = function () {
+    var button = document.getElementById("nextGenerationButton");
+    button.onclick = onButtonClick;
+    var canvas = document.getElementById("canvasGameOfLife");
+    canvas.onclick = onCanvasClick;
+    display(currentGeneration);
+
+    var startButton = document.getElementById("startButton");
+    startButton.onclick = onStartButtonClick;
+
+    var stopButton = document.getElementById("stopButton");
+    stopButton.onclick = onStopButtonClick;
+}
+
+
+function generateEmpty2dSquareArray(size) {
     var arr = new Array(size);
     for (var i = 0; i < size; i++) {
         arr[i] = new Array(size);
@@ -74,13 +89,7 @@ function clear(array) {
     }
 }
 
-window.onload = function () {
-    var button = document.getElementById("nextGenerationButton");
-    button.onclick = onButtonClick;
-    var canvas = document.getElementById("canvasGameOfLife");
-    canvas.onclick = onCanvasClick;
-    display(currentGeneration);
-}
+
 
 var field_size = 10;
 var currentGeneration = generateEmpty2dSquareArray(field_size);
@@ -106,9 +115,22 @@ function onCanvasClick(args) {
     var cellWidth = canvas.clientWidth / currentGeneration[0].length;
     var cellX = Math.floor(args.offsetX / cellWidth);
     var cellY = Math.floor(args.offsetY / cellHeight);
-
-
     currentGeneration[cellX][cellY] == 0 ? currentGeneration[cellX][cellY] = 1 : currentGeneration[cellX][cellY] = 0; 
-
     display(currentGeneration);
+}
+
+// start button function 
+var counter = 0;
+var timer;
+function onStartButtonClick() {
+    timer = setInterval(function () {
+        document.getElementById("nextGenerationButton").click();
+        counter++;
+    }, 1000);
+}
+
+//stop button function
+function onStopButtonClick() {
+    clearInterval(timer);
+    document.getElementById("counterDisplay").innerHTML = "Generation number:" + counter;
 }

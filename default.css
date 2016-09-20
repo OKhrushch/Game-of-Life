@@ -2,3 +2,17 @@
     color: #000 !important;
     font-family: Courier !important;
 }
+#div1 input[type="button"]{
+    width:300px;
+    height:30px;
+    font-size: 16px;
+    border:1px solid blue;
+    background-color:white;
+    float:left;
+    clear:both;
+    margin:10px 0;     
+}
+#div2 {
+    float:left;
+    clear:both;
+}
