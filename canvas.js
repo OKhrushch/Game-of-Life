@@ -1,9 +1,10 @@
 ﻿
+
 function drawGame(testArray) {
-    var cellBorder = 3;
-    var canvas = document.getElementById('canvasGameOfLife');
-    var cellHeight = canvas.height / testArray.length;
-    var cellWidth = canvas.width / testArray[0].length;
+    var cellBorder = 2.5;
+    var canvas = document.getElementById('gameCanvas');
+    var cellHeight = 20;
+    var cellWidth = 20;
 
     if (canvas.getContext) {
         var ctx = canvas.getContext('2d');
@@ -19,5 +20,14 @@ function drawGame(testArray) {
                                cellWidth - cellBorder * 2,
                                cellHeight - cellBorder * 2);
             }
+    }
+}
+
+
+function clearCanvas() {
+    var canvas = document.getElementById('gameCanvas');
+    if (canvas.getContext) {
+        var ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
     }
 }

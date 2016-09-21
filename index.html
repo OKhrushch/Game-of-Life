@@ -5,22 +5,36 @@
     <meta charset="utf-8" />
 
     <link href="default.css" rel="stylesheet" type="text/css">
-    <script src="canvas.js" type="text/javascript"></script>
+
     <script src="game.js" type="text/javascript"></script>
+    <script src="canvas.js" type="text/javascript"></script>
 </head>
 <body>
    
-    <div id="canvasWrapper">
-        <canvas id="canvasGameOfLife" width="300" height="300"></canvas>
-    </div>
+    <div id="gameArea">
+        <canvas id="gameCanvas" width="900" height="500"></canvas>
 
-    <div id="div1">
-        <input type="button" id="nextGenerationButton" value="Next Generation">
-        <input type="button" id="startButton" value="Start" onclick="onStartButtonClick" />
-        <input type="button" id="stopButton" value="Stop" onclick="onStopButtonClick" />        
-    </div>
-    <div id="div2">
-        <p id="counterDisplay">Counter output will be displayed here </p>
+
+        <div id="div1">
+            <input type="button" id="nextGenerationButton" value="Next Generation">
+            <input type="button" id="startButton" value="Start" onclick="onStartButtonClick" />
+            <input type="button" id="stopButton" value="Stop" onclick="onStopButtonClick" />
+        </div>
+        <div id="div2">
+            <p id="counterDisplay">Counter output will be displayed here </p>
+        </div>
+
+        <div class="canvasSize">
+            <form>
+                Select field size and height.
+                <input type="number" id="fieldHeight" name="fieldHeight" min=1 max="100" value="10" />
+                <input type="number" id="fieldWidth"  name="fieldWidth"  min=1 max="100" value="10" />
+                <input type="submit" />
+            </form>
+            <input type="button" id="generateCustomField" value="Generate field" onclick="generateCustomField()"/>
+            <input type="button" id="generateRandomField" value="Random field" onclick="generateRandomField()" />
+            <input type="button" id="randomCells" value="Fill with cells" onclick="fillRandomCells()" />
+        </div>
     </div>
 </body>
 </html>
